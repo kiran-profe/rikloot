@@ -1,0 +1,277 @@
+{%- style -%}
+  #rl-hero-{{ section.id }} {
+    --rl-ground: {{ section.settings.color_ground }};
+    --rl-accent: {{ section.settings.color_accent }};
+    --rl-pop: {{ section.settings.color_pop }};
+    --rl-muted: #D5DDEE;
+    position: relative;
+    overflow: hidden;
+    background: var(--rl-ground);
+    color: #fff;
+    font-family: var(--rl-body);
+    padding: {{ section.settings.padding_top }}px 2rem {{ section.settings.padding_bottom }}px;
+  }
+  #rl-hero-{{ section.id }} .rl-dots {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: .08; pointer-events: none;
+  }
+  #rl-hero-{{ section.id }} .rl-wrap {
+    position: relative; max-width: 1280px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 4.8rem;
+  }
+  #rl-hero-{{ section.id }} .rl-grid {
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 4.8rem; align-items: center;
+  }
+  #rl-hero-{{ section.id }} .rl-copy { display: flex; flex-direction: column; gap: 2.4rem; }
+  #rl-hero-{{ section.id }} .rl-badge {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: .5rem;
+    padding: .7rem 1.4rem; border-radius: 999px; background: rgba(255,255,255,.1);
+    font-size: 1.5rem; font-weight: 500;
+  }
+  #rl-hero-{{ section.id }} h1.rl-title {
+    margin: 0; color: #fff;
+    font-family: var(--rl-display); font-weight: 800;
+     line-height: 1.02; letter-spacing: -.02em;
+  }
+  #rl-hero-{{ section.id }} h1.rl-title span { color: var(--rl-accent); display: block; }
+  #rl-hero-{{ section.id }} h1.rl-title { font-size: clamp(3.4rem, 5.6vw, 7.2rem); }
+  #rl-hero-{{ section.id }} .rl-sub {
+    margin: 0; max-width: 54rem; font-size: 1.9rem; line-height: 1.55; color: var(--rl-muted);
+  }
+  #rl-hero-{{ section.id }} .rl-ctas { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  #rl-hero-{{ section.id }} .rl-btn {
+    display: inline-flex; align-items: center; gap: .6rem; min-height: 52px; padding: 0 2.8rem;
+    border-radius: 999px; font-weight: 600; font-size: 1.6rem; text-decoration: none;
+    transition: transform .15s ease;
+  }
+  #rl-hero-{{ section.id }} .rl-btn:hover { transform: translateY(-2px); }
+  #rl-hero-{{ section.id }} .rl-btn--primary { background: var(--rl-accent); color: var(--rl-ground); }
+  #rl-hero-{{ section.id }} .rl-btn--ghost { border: 1.5px solid rgba(255,255,255,.45); color: #fff; }
+  #rl-hero-{{ section.id }} .rl-btn:focus-visible,
+  #rl-hero-{{ section.id }} .rl-chip:focus-visible { outline: 3px solid var(--rl-accent); outline-offset: 3px; }
+  #rl-hero-{{ section.id }} .rl-trust {
+    display: flex; gap: 2.4rem; flex-wrap: wrap; padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,.15); font-size: 1.5rem; color: var(--rl-muted);
+  }
+  #rl-hero-{{ section.id }} .rl-trust span { display: inline-flex; align-items: center; gap: .45rem; }
+  #rl-hero-{{ section.id }} .rl-art { width: 100%; max-width: 560px; height: auto; justify-self: center; }
+  #rl-hero-{{ section.id }} .rl-art-img { width: 100%; max-width: 560px; height: auto; justify-self: center; display: block; }
+  #rl-hero-{{ section.id }} .rl-chips { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  #rl-hero-{{ section.id }} .rl-chip {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.8rem;
+    border-radius: 12px; background: rgba(255,255,255,.08); color: #fff;
+    text-decoration: none; font-weight: 500;
+  }
+  #rl-hero-{{ section.id }} .rl-chip:hover { background: rgba(255,255,255,.16); }
+  @media (max-width: 900px) {
+    #rl-hero-{{ section.id }} .rl-grid { grid-template-columns: 1fr; gap: 2rem; }
+    #rl-hero-{{ section.id }} .rl-art, #rl-hero-{{ section.id }} .rl-art-img { max-width: 380px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #rl-hero-{{ section.id }} .rl-btn { transition: none; }
+  }
+  @keyframes rlRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes rlPop { 0% { opacity: 0; transform: scale(.6) translateY(30px); } 70% { opacity: 1; transform: scale(1.04) translateY(-6px); } 100% { transform: none; } }
+  @keyframes rlBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes rlShadow { 0%, 100% { transform: scale(1); opacity: .25; } 50% { transform: scale(.82); opacity: .15; } }
+  @keyframes rlFlow { to { stroke-dashoffset: -36.2; } }
+  @keyframes rlDrift { 0%, 100% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(0, -9px) rotate(-4deg); } }
+  @keyframes rlTwinkle { 0%, 100% { opacity: 1; transform: scale(1) rotate(0); } 50% { opacity: .25; transform: scale(.55) rotate(45deg); } }
+  #rl-hero-{{ section.id }} .rl-copy > * { animation: rlRise .7s cubic-bezier(.2,.7,.2,1) both; }
+  #rl-hero-{{ section.id }} .rl-copy > *:nth-child(2) { animation-delay: .08s; }
+  #rl-hero-{{ section.id }} .rl-copy > *:nth-child(3) { animation-delay: .18s; }
+  #rl-hero-{{ section.id }} .rl-copy > *:nth-child(4) { animation-delay: .28s; }
+  #rl-hero-{{ section.id }} .rl-copy > *:nth-child(5) { animation-delay: .38s; }
+  #rl-hero-{{ section.id }} .rl-chips { animation: rlRise .7s .5s cubic-bezier(.2,.7,.2,1) both; }
+  #rl-hero-{{ section.id }} .rl-art .rl-pin { transform-box: fill-box; transform-origin: 50% 100%; animation: rlPop .9s .2s cubic-bezier(.2,.8,.2,1) both, rlBob 4s 1.1s ease-in-out infinite; }
+  #rl-hero-{{ section.id }} .rl-art .rl-shadow { transform-box: fill-box; transform-origin: center; animation: rlShadow 4s 1.1s ease-in-out infinite; }
+  #rl-hero-{{ section.id }} .rl-art .rl-route-flow { animation: rlFlow 1.4s linear infinite; }
+  #rl-hero-{{ section.id }} .rl-art .rl-tile { transform-box: fill-box; transform-origin: center; animation: rlRise .6s both, rlDrift 6s ease-in-out infinite; }
+  #rl-hero-{{ section.id }} .rl-art .rl-tile--1 { animation-delay: .5s, 1.1s; }
+  #rl-hero-{{ section.id }} .rl-art .rl-tile--2 { animation-delay: .6s, 2.2s; }
+  #rl-hero-{{ section.id }} .rl-art .rl-tile--3 { animation-delay: .7s, 1.6s; }
+  #rl-hero-{{ section.id }} .rl-art .rl-tile--4 { animation-delay: .8s, 2.8s; }
+  #rl-hero-{{ section.id }} .rl-art .rl-twinkle { transform-box: fill-box; transform-origin: center; animation: rlTwinkle 2.6s ease-in-out infinite; }
+  #rl-hero-{{ section.id }} .rl-art .rl-twinkle--2 { animation-delay: .9s; }
+  #rl-hero-{{ section.id }} .rl-art .rl-twinkle--3 { animation-delay: 1.7s; }
+  #rl-hero-{{ section.id }} .rl-btn--primary { position: relative; overflow: hidden; }
+  #rl-hero-{{ section.id }} .rl-btn--primary::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%); transform: translateX(-120%); transition: transform .6s ease; }
+  #rl-hero-{{ section.id }} .rl-btn--primary:hover::after { transform: translateX(120%); }
+  #rl-hero-{{ section.id }} .rl-btn--primary:hover svg { transform: translateX(4px); }
+  #rl-hero-{{ section.id }} .rl-btn svg { transition: transform .2s ease; }
+  @media (prefers-reduced-motion: reduce) {
+    #rl-hero-{{ section.id }} *, #rl-hero-{{ section.id }} *::after { animation: none !important; transition: none !important; }
+  }
+{%- endstyle -%}
+
+<section id="rl-hero-{{ section.id }}" class="rl-hero">
+  <svg class="rl-dots" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="rlDots-{{ section.id }}" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="#fff"/></pattern></defs>
+    <rect width="100%" height="100%" fill="url(#rlDots-{{ section.id }})"/>
+  </svg>
+
+  <div class="rl-wrap">
+    <div class="rl-grid">
+      <div class="rl-copy">
+        {%- if section.settings.badge != blank -%}
+          <span class="rl-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--rl-accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            {{ section.settings.badge | escape }}
+          </span>
+        {%- endif -%}
+
+        <h1 class="rl-title">
+          {{ section.settings.heading_line1 | escape }}
+          <span>{{ section.settings.heading_line2 | escape }}</span>
+          {{ section.settings.heading_line3 | escape }}
+        </h1>
+
+        {%- if section.settings.subheading != blank -%}
+          <p class="rl-sub">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+
+        <div class="rl-ctas">
+          {%- if section.settings.button1_label != blank -%}
+            <a class="rl-btn rl-btn--primary" href="{{ section.settings.button1_link | default: routes.all_products_collection_url }}">
+              {{ section.settings.button1_label | escape }}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button2_label != blank -%}
+            <a class="rl-btn rl-btn--ghost" href="{{ section.settings.button2_link | default: routes.collections_url }}">
+              {{ section.settings.button2_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+
+        <div class="rl-trust">
+          {%- if section.settings.trust1 != blank -%}
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--rl-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/></svg>{{ section.settings.trust1 | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.trust2 != blank -%}
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--rl-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>{{ section.settings.trust2 | escape }}</span>
+          {%- endif -%}
+          {%- if section.settings.trust3 != blank -%}
+            <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--rl-accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>{{ section.settings.trust3 | escape }}</span>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 1120 | image_tag: class: 'rl-art-img', loading: 'eager', widths: '380, 560, 760, 1120', sizes: '(max-width: 900px) 380px, 560px' }}
+      {%- else -%}
+        <svg class="rl-art" viewBox="0 0 560 560" role="img" aria-label="A location pin holding a parcel on a dotted route from a shop shelf to a house" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="280" cy="240" r="215" fill="#fff" opacity=".05"/>
+          <path class="rl-route-flow" d="M58 488 C150 540 200 450 280 470 S420 545 502 482" fill="none" stroke="var(--rl-accent)" stroke-width="8" stroke-dasharray="0.1 18" stroke-linecap="round"/>
+          <circle cx="58" cy="488" r="30" fill="#fff"/>
+          <g fill="none" stroke="var(--rl-ground)" stroke-width="2.4" stroke-linecap="round"><path d="M44 480h28M44 496h28M44 472v32M72 472v32"/></g>
+          <rect x="48" y="483" width="7" height="9" fill="var(--rl-pop)"/><rect x="59" y="485" width="9" height="7" fill="var(--rl-accent)"/>
+          <text x="58" y="540" text-anchor="middle" font-family="Outfit, sans-serif" font-size="15" font-weight="600" fill="#D5DDEE">{{ section.settings.label_from | escape }}</text>
+          <circle cx="502" cy="482" r="30" fill="var(--rl-accent)"/>
+          <g fill="none" stroke="var(--rl-ground)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M488 484l14-12 14 12"/><path d="M492 481v14h20v-14"/><path d="M499 495v-7h6v7"/></g>
+          <text x="502" y="534" text-anchor="middle" font-family="Outfit, sans-serif" font-size="15" font-weight="600" fill="#D5DDEE">{{ section.settings.label_to | escape }}</text>
+          <ellipse class="rl-shadow" cx="280" cy="474" rx="46" ry="9" fill="#000" opacity=".25"/>
+          <g class="rl-pin">
+          <path d="M280 466 C222 392 132 334 132 232 A148 148 0 1 1 428 232 C428 334 338 392 280 466 Z" fill="var(--rl-pop)"/>
+          <path d="M176 168 C196 132 226 112 262 106" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="280" cy="232" r="104" fill="#fff"/>
+          <g transform="rotate(-6 280 236)">
+            <rect x="220" y="204" width="120" height="88" rx="6" fill="var(--rl-accent)"/>
+            <rect x="210" y="184" width="140" height="28" rx="6" fill="#E59A00"/>
+            <rect x="272" y="184" width="16" height="108" fill="var(--rl-ground)"/>
+            <rect x="232" y="252" width="30" height="22" rx="3" fill="#FFF6E6"/>
+            <path d="M237 259h20M237 266h13" stroke="var(--rl-ground)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M280 184 C262 160 246 166 254 180 M280 184 C298 160 314 166 306 180" fill="none" stroke="var(--rl-ground)" stroke-width="3.5" stroke-linecap="round"/>
+          </g>
+          </g><g class="rl-tile rl-tile--1">
+          <circle cx="86" cy="118" r="40" fill="#22375F"/>
+          <g fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M70 104h24v20a8 8 0 0 1-8 8h-8a8 8 0 0 1-8-8z"/><path d="M94 109h4a5 5 0 0 1 0 10h-4"/></g>
+          <path d="M78 96c0-4 4-4 4-8M86 96c0-4 4-4 4-8" fill="none" stroke="var(--rl-accent)" stroke-width="2.6" stroke-linecap="round"/>
+          </g><g class="rl-tile rl-tile--2">
+          <circle cx="478" cy="94" r="40" fill="#22375F"/>
+          <path d="M466 104h24l-4 18h-16z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M478 104V88M478 94c-8 0-12-6-12-10 6 0 12 3 12 10zM478 90c8 0 12-6 12-10-6 0-12 3-12 10z" fill="none" stroke="#7FD1A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </g><g class="rl-tile rl-tile--3">
+          <circle cx="506" cy="300" r="36" fill="#22375F"/>
+          <path d="M494 300l8-18h8l8 18z" fill="none" stroke="var(--rl-accent)" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M506 300v12M498 314h16" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+          </g><g class="rl-tile rl-tile--4">
+          <circle cx="52" cy="318" r="36" fill="#22375F"/>
+          <g fill="none" stroke="var(--rl-pop)" stroke-width="2.6" stroke-linecap="round"><circle cx="52" cy="318" r="14"/><path d="M42 308c6 4 14 4 20 0M40 320c8 4 16 4 24 0"/></g>
+          <path d="M64 330l10 10" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+          </g>
+          <path class="rl-twinkle" fill="var(--rl-accent)" d="M176 70l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/>
+          <path class="rl-twinkle rl-twinkle--2" fill="var(--rl-accent)" d="M410 410l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>
+          <path class="rl-twinkle rl-twinkle--3" fill="#fff" d="M470 200l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z"/>
+        </svg>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <nav class="rl-chips" aria-label="Shop by category">
+        {%- for block in section.blocks -%}
+          <a class="rl-chip" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RikLoot Hero",
+  "tag": "div",
+  "class": "section-rikloot-hero",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Tracked from our shelf to your address" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Grab the" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2 (highlighted)", "default": "good stuff." },
+    { "type": "text", "id": "heading_line3", "label": "Heading line 3", "default": "Skip the hunt." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Clever home finds, handy crafts and everyday essentials — handpicked, packed and on their way to your door." },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button1_label", "label": "Primary button label", "default": "Start looting" },
+    { "type": "url", "id": "button1_link", "label": "Primary button link" },
+    { "type": "text", "id": "button2_label", "label": "Secondary button label", "default": "Browse categories" },
+    { "type": "url", "id": "button2_link", "label": "Secondary button link" },
+    { "type": "header", "content": "Trust line" },
+    { "type": "text", "id": "trust1", "label": "Item 1", "default": "Every order tracked" },
+    { "type": "text", "id": "trust2", "label": "Item 2", "default": "Secure checkout" },
+    { "type": "text", "id": "trust3", "label": "Item 3", "default": "Easy returns" },
+    { "type": "header", "content": "Illustration" },
+    { "type": "image_picker", "id": "hero_image", "label": "Replace illustration with an image", "info": "Leave empty to keep the built-in parcel pin illustration." },
+    { "type": "text", "id": "label_from", "label": "Route start label", "default": "Our shelf" },
+    { "type": "text", "id": "label_to", "label": "Route end label", "default": "Your address" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "color_ground", "label": "Background (navy)", "default": "#15213D" },
+    { "type": "color", "id": "color_accent", "label": "Accent (yellow)", "default": "#FFC12E" },
+    { "type": "color", "id": "color_pop", "label": "Brand red", "default": "#E2432A" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Category chip",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Category" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RikLoot Hero",
+      "blocks": [
+        { "type": "chip", "settings": { "label": "Kitchen helpers" } },
+        { "type": "chip", "settings": { "label": "Storage & organisers" } },
+        { "type": "chip", "settings": { "label": "Handmade crafts" } },
+        { "type": "chip", "settings": { "label": "Home décor" } },
+        { "type": "chip", "settings": { "label": "Everyday essentials" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

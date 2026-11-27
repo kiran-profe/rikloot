@@ -1,0 +1,239 @@
+{
+  "sections": {
+    "banner": {
+      "type": "rl-page-hero",
+      "settings": {
+        "heading": "About RikLoot",
+        "subheading": "One shelf for the little things that make life easier — from kitchen helpers to handmade crafts, tracked from our shelf to your address.",
+        "art": "pin",
+        "color_scheme": "scheme-3"
+      }
+    },
+    "story": {
+      "type": "rl-about",
+      "blocks": {
+        "value1": {
+          "type": "value",
+          "settings": {
+            "icon": "star",
+            "title": "Handpicked, not random",
+            "text": "Every product is checked for usefulness, quality and value before it earns a place on our shelf."
+          }
+        },
+        "value2": {
+          "type": "value",
+          "settings": {
+            "icon": "tag",
+            "title": "Fair, upfront prices",
+            "text": "Honest prices inclusive of GST, with shipping shown clearly before you pay. No surprise charges."
+          }
+        },
+        "value3": {
+          "type": "value",
+          "settings": {
+            "icon": "pin",
+            "title": "Tracked all the way",
+            "text": "Every order gets a tracking link the moment it ships, so you always know where your parcel is."
+          }
+        },
+        "value4": {
+          "type": "value",
+          "settings": {
+            "icon": "chat",
+            "title": "Real people, real help",
+            "text": "Questions, returns or a damaged parcel? Write to us and a real person will sort it out."
+          }
+        }
+      },
+      "block_order": [
+        "value1",
+        "value2",
+        "value3",
+        "value4"
+      ],
+      "settings": {
+        "tag": "Est. 2026",
+        "heading": "Good finds shouldn't be hard to find",
+        "story": "<p>RikLoot started with a simple frustration: the genuinely useful things — a clever kitchen tool, a drawer organiser that actually fits, a handmade gift that feels personal — are scattered across a hundred different places, buried under listings that all look the same.</p><p>So we built one shelf for all of it. Kitchen helpers, storage and organisers, handmade crafts, home décor, small gadgets, beauty and care, and the everyday essentials you always seem to run out of. We work with trusted makers and suppliers across India, test what we can, and only list products we'd happily use in our own homes.</p><p>Every order is packed with care and tracked from dispatch to your doorstep. And if something isn't right, we fix it — that's the whole idea behind the name: good loot, delivered honestly.</p>",
+        "signature": "— Team RikLoot",
+        "values_heading": "What we promise",
+        "cta_heading": "Ready to grab some good stuff?",
+        "cta_label": "Start shopping",
+        "cta_link": "shopify://collections/all",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "shelf": {
+      "type": "rl-category-grid",
+      "blocks": {
+        "c1": {
+          "type": "category",
+          "settings": {
+            "title": "Kitchen helpers",
+            "caption": "Cook, serve, store",
+            "art": "kitchen",
+            "tone": "blush",
+            "wide": false
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "title": "Storage & organisers",
+            "caption": "Tidy every corner",
+            "art": "storage",
+            "tone": "mist",
+            "wide": false
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "title": "Handmade crafts",
+            "caption": "Made with care",
+            "art": "crafts",
+            "tone": "butter",
+            "wide": false
+          }
+        },
+        "c4": {
+          "type": "category",
+          "settings": {
+            "title": "Everyday essentials",
+            "caption": "The stuff you run out of",
+            "art": "essentials",
+            "tone": "mint",
+            "wide": false
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "heading": "What's on our shelf",
+        "subheading": "A little bit of everything, chosen with a lot of care.",
+        "link_label": "See all categories",
+        "color_scheme": "scheme-4",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "steps": {
+      "type": "rl-steps",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "You place an order",
+            "text": "Pay securely by UPI, card, net banking or wallet. You get an order confirmation right away."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "We check and pack",
+            "text": "Your items are quality-checked and packed to survive the journey."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "It ships, tracked",
+            "text": "A tracking link lands in your inbox the moment your parcel leaves."
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "It reaches you",
+            "text": "Usually within 5–10 business days. Not happy? Our return policy has you covered."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {
+        "heading": "How an order reaches you",
+        "subheading": "From the moment you tap order to the knock on your door."
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "q1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Where do you deliver?",
+            "icon": "map_pin",
+            "row_content": "<p>We deliver to most serviceable pin codes across India. Enter your pin code at checkout to confirm delivery to your address.</p>"
+          }
+        },
+        "q2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long does delivery take?",
+            "icon": "truck",
+            "row_content": "<p>Orders are usually dispatched within 1–3 business days and delivered within 5–10 business days, depending on your location. See our Shipping Policy for details.</p>"
+          }
+        },
+        "q3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I return a product?",
+            "icon": "return",
+            "row_content": "<p>Yes. If an item arrives damaged, defective or different from what you ordered, tell us within 7 days of delivery and we'll replace it or refund you. See our Refund &amp; Return Policy.</p>"
+          }
+        },
+        "q4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Is it safe to pay on RikLoot?",
+            "icon": "lock",
+            "row_content": "<p>Yes. Payments are processed by secure, RBI-regulated payment gateways. We never see or store your card details.</p>"
+          }
+        },
+        "q5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I reach you?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Use our Contact page or the email in the footer. We reply within one business day.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "heading": "Good to know",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "color_scheme": "scheme-1",
+        "container_color_scheme": "scheme-2",
+        "open_first_collapsible_row": true,
+        "padding_top": 56,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "story",
+    "shelf",
+    "steps",
+    "faq"
+  ]
+}

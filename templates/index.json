@@ -1,0 +1,319 @@
+{
+  "sections": {
+    "hero": {
+      "type": "rl-hero",
+      "blocks": {
+        "c1": {
+          "type": "chip",
+          "settings": {
+            "label": "Kitchen helpers"
+          }
+        },
+        "c2": {
+          "type": "chip",
+          "settings": {
+            "label": "Storage & organisers"
+          }
+        },
+        "c3": {
+          "type": "chip",
+          "settings": {
+            "label": "Handmade crafts"
+          }
+        },
+        "c4": {
+          "type": "chip",
+          "settings": {
+            "label": "Home décor"
+          }
+        },
+        "c5": {
+          "type": "chip",
+          "settings": {
+            "label": "Everyday essentials"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "settings": {
+        "color_ground": "#15213D",
+        "color_accent": "#FFC12E",
+        "color_pop": "#E2432A",
+        "padding_top": 56,
+        "padding_bottom": 64,
+        "button1_link": "shopify://collections/all"
+      }
+    },
+    "categories": {
+      "type": "rl-category-grid",
+      "blocks": {
+        "cat1": {
+          "type": "category",
+          "settings": {
+            "title": "Kitchen helpers",
+            "caption": "Cook, serve, store",
+            "art": "kitchen",
+            "tone": "blush",
+            "wide": false
+          }
+        },
+        "cat2": {
+          "type": "category",
+          "settings": {
+            "title": "Storage & organisers",
+            "caption": "Tidy every corner",
+            "art": "storage",
+            "tone": "mist",
+            "wide": false
+          }
+        },
+        "cat3": {
+          "type": "category",
+          "settings": {
+            "title": "Handmade crafts",
+            "caption": "Made with care",
+            "art": "crafts",
+            "tone": "butter",
+            "wide": false
+          }
+        },
+        "cat4": {
+          "type": "category",
+          "settings": {
+            "title": "Home décor",
+            "caption": "Little lifts for every room",
+            "art": "decor",
+            "tone": "mint",
+            "wide": false
+          }
+        },
+        "cat5": {
+          "type": "category",
+          "settings": {
+            "title": "Everyday essentials",
+            "caption": "The stuff you run out of",
+            "art": "essentials",
+            "tone": "mist",
+            "wide": false
+          }
+        },
+        "cat6": {
+          "type": "category",
+          "settings": {
+            "title": "Gadgets",
+            "caption": "Small tech, big help",
+            "art": "gadgets",
+            "tone": "butter",
+            "wide": false
+          }
+        },
+        "cat7": {
+          "type": "category",
+          "settings": {
+            "title": "Gift picks",
+            "caption": "Wrapped-ready finds",
+            "art": "gifts",
+            "tone": "navy",
+            "wide": true
+          }
+        }
+      },
+      "block_order": [
+        "cat1",
+        "cat2",
+        "cat3",
+        "cat4",
+        "cat5",
+        "cat6",
+        "cat7"
+      ],
+      "settings": {}
+    },
+    "showcase": {
+      "type": "rl-category-showcase",
+      "blocks": {
+        "tab1": {
+          "type": "tab",
+          "settings": {
+            "label": "Kitchen"
+          }
+        },
+        "tab2": {
+          "type": "tab",
+          "settings": {
+            "label": "Storage"
+          }
+        },
+        "tab3": {
+          "type": "tab",
+          "settings": {
+            "label": "Crafts"
+          }
+        },
+        "tab4": {
+          "type": "tab",
+          "settings": {
+            "label": "Décor"
+          }
+        },
+        "tab5": {
+          "type": "tab",
+          "settings": {
+            "label": "Essentials"
+          }
+        }
+      },
+      "block_order": [
+        "tab1",
+        "tab2",
+        "tab3",
+        "tab4",
+        "tab5"
+      ],
+      "settings": {}
+    },
+    "steps": {
+      "type": "rl-steps",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Pick your loot",
+            "text": "Browse by category and add what you love to your cart."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "We pack it",
+            "text": "Your order is checked and packed with care, ready to ship."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Track every step",
+            "text": "You get a tracking link so you always know where your parcel is."
+          }
+        },
+        "s4": {
+          "type": "step",
+          "settings": {
+            "title": "At your door",
+            "text": "Open the box and enjoy. Something not right? We'll help."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4"
+      ],
+      "settings": {}
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "New arrivals",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-4",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "marquee": {
+      "type": "rl-marquee",
+      "blocks": {
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Kitchen helpers",
+            "link": ""
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "Storage & organisers",
+            "link": ""
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "Handmade crafts",
+            "link": ""
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "text": "Home décor",
+            "link": ""
+          }
+        },
+        "m5": {
+          "type": "item",
+          "settings": {
+            "text": "Everyday essentials",
+            "link": ""
+          }
+        },
+        "m6": {
+          "type": "item",
+          "settings": {
+            "text": "Gift picks",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5",
+        "m6"
+      ],
+      "settings": {
+        "tone": "yellow",
+        "speed": 40,
+        "tilt": -1,
+        "padding": 16
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "categories",
+    "showcase",
+    "steps",
+    "featured_collection"
+  ]
+}

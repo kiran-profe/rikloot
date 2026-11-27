@@ -1,0 +1,167 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{%- unless section.settings.quick_add == 'none' -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{%- style -%}
+  #rl-show-{{ section.id }} { padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; }
+  #rl-show-{{ section.id }} .rl-tabs {
+    display: flex; gap: 1rem; overflow-x: auto; padding: .4rem .2rem 1.2rem; margin-bottom: 2rem;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  #rl-show-{{ section.id }} .rl-tabs::-webkit-scrollbar { display: none; }
+  #rl-show-{{ section.id }} .rl-tab {
+    flex: none; display: inline-flex; align-items: center; gap: .8rem;
+    min-height: 4.6rem; padding: 0 2rem; border-radius: 999px; cursor: pointer;
+    border: 2px solid rgba(21,33,61,.14); background: transparent;
+    font: 600 1.5rem/1 var(--rl-body); color: var(--rl-navy);
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  #rl-show-{{ section.id }} .rl-tab:hover { border-color: var(--rl-navy); }
+  #rl-show-{{ section.id }} .rl-tab[aria-selected="true"] { background: var(--rl-navy); border-color: var(--rl-navy); color: #fff; }
+  #rl-show-{{ section.id }} .rl-tab__dot { width: .9rem; height: .9rem; border-radius: 999px; background: var(--rl-yellow); }
+  #rl-show-{{ section.id }} .rl-tab[aria-selected="true"] .rl-tab__dot { background: var(--rl-red-bright); }
+  #rl-show-{{ section.id }} .rl-panel[hidden] { display: none; }
+  #rl-show-{{ section.id }} .rl-panel__foot { display: flex; justify-content: center; margin-top: 3.2rem; }
+  #rl-show-{{ section.id }} .rl-empty {
+    padding: 4rem 2rem; text-align: center; border-radius: var(--rl-radius); background: var(--rl-butter); color: var(--rl-navy);
+  }
+{%- endstyle -%}
+
+<section id="rl-show-{{ section.id }}" class="rl-section color-{{ section.settings.color_scheme }} gradient">
+  <div class="rl-container">
+    <div class="rl-head{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div>
+        <h2 class="rl-head__title">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.subheading != blank -%}<p class="rl-head__sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="rl-tabs{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" role="tablist" aria-label="{{ section.settings.heading | escape }}">
+        {%- for block in section.blocks -%}
+          {%- assign label = block.settings.label | default: block.settings.collection.title | default: 'Category' -%}
+          <button type="button" class="rl-tab" role="tab"
+            id="rl-tab-{{ block.id }}" aria-controls="rl-panel-{{ block.id }}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            tabindex="{% if forloop.first %}0{% else %}-1{% endif %}" {{ block.shopify_attributes }}>
+            <span class="rl-tab__dot" aria-hidden="true"></span>{{ label | escape }}
+          </button>
+        {%- endfor -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- assign col = block.settings.collection -%}
+        <div class="rl-panel" role="tabpanel" id="rl-panel-{{ block.id }}" aria-labelledby="rl-tab-{{ block.id }}" tabindex="0" {% unless forloop.first %}hidden{% endunless %}>
+          {%- if col != blank and col.products_count > 0 -%}
+            <ul class="grid product-grid contains-card contains-card--product grid--2-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop" role="list">
+              {%- for product in col.products limit: section.settings.products_to_show -%}
+                <li class="grid__item">
+                  {% render 'card-product',
+                    card_product: product,
+                    media_aspect_ratio: section.settings.image_ratio,
+                    image_shape: 'default',
+                    show_secondary_image: section.settings.show_secondary_image,
+                    show_vendor: false,
+                    show_rating: false,
+                    lazy_load: true,
+                    skip_styles: true,
+                    section_id: section.id,
+                    quick_add: section.settings.quick_add
+                  %}
+                </li>
+              {%- endfor -%}
+            </ul>
+            <div class="rl-panel__foot">
+              <a class="button button--secondary" href="{{ col.url }}">See all {{ col.title | escape }}</a>
+            </div>
+          {%- else -%}
+            <ul class="grid product-grid contains-card contains-card--product grid--2-col-tablet-down grid--4-col-desktop" role="list">
+              {%- for i in (1..4) -%}
+                <li class="grid__item">{% render 'card-product', show_vendor: false, media_aspect_ratio: 'square', lazy_load: true, placeholder_image: 'product-apparel-1' %}</li>
+              {%- endfor -%}
+            </ul>
+            <p class="rl-empty">Pick a collection for this tab in the theme editor to show real products here.</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+  (function () {
+    var root = document.getElementById('rl-show-{{ section.id }}');
+    if (!root) return;
+    var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    function select(tab) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var p = document.getElementById(t.getAttribute('aria-controls'));
+        if (p) p.hidden = !on;
+      });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(t); });
+      t.addEventListener('keydown', function (e) {
+        var k = e.key, n = null;
+        if (k === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+        if (k === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
+        if (n) { e.preventDefault(); select(n); n.focus(); }
+      });
+    });
+    document.addEventListener('shopify:block:select', function (e) {
+      var t = document.getElementById('rl-tab-' + e.detail.blockId);
+      if (t && root.contains(t)) select(t);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "RikLoot Category Products",
+  "tag": "div",
+  "class": "section-rl-showcase",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fresh off the shelf" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Browse our latest finds, one category at a time." },
+    { "type": "range", "id": "products_to_show", "label": "Products per tab", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "range", "id": "columns_desktop", "label": "Columns on desktop", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "select", "id": "image_ratio", "label": "Image ratio", "default": "square", "options": [ { "value": "adapt", "label": "Adapt to image" }, { "value": "portrait", "label": "Portrait" }, { "value": "square", "label": "Square" } ] },
+    { "type": "checkbox", "id": "show_secondary_image", "label": "Show second image on hover", "default": true },
+    { "type": "select", "id": "quick_add", "label": "Quick add", "default": "standard", "options": [ { "value": "none", "label": "None" }, { "value": "standard", "label": "Standard" } ] },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Category tab",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Tab label", "info": "Leave empty to use the collection's name." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RikLoot Category Products",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "Kitchen" } },
+        { "type": "tab", "settings": { "label": "Storage" } },
+        { "type": "tab", "settings": { "label": "Crafts" } },
+        { "type": "tab", "settings": { "label": "Décor" } },
+        { "type": "tab", "settings": { "label": "Essentials" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

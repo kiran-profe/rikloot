@@ -1,0 +1,121 @@
+{%- style -%}
+  #rl-rp-{{ section.id }} { padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; }
+  #rl-rp-{{ section.id }} .rl-rp__grid { display: grid; gap: 3.2rem; grid-template-columns: 1fr; }
+  @media (min-width: 990px) { #rl-rp-{{ section.id }} .rl-rp__grid { grid-template-columns: 26rem minmax(0, 1fr); gap: 6.4rem; } }
+  #rl-rp-{{ section.id }} .rl-rp__aside { align-self: start; }
+  @media (min-width: 990px) { #rl-rp-{{ section.id }} .rl-rp__aside { position: sticky; top: 12rem; } }
+  #rl-rp-{{ section.id }} .rl-rp__box { padding: 2.2rem; border-radius: var(--rl-radius); background: var(--rl-butter); color: var(--rl-navy); }
+  #rl-rp-{{ section.id }} .rl-rp__box + .rl-rp__box { margin-top: 1.6rem; background: var(--rl-mist); }
+  #rl-rp-{{ section.id }} .rl-rp__box-title { margin: 0 0 1.2rem; font: 700 1.8rem/1.2 var(--rl-display); }
+  #rl-rp-{{ section.id }} .rl-rp__toc { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; counter-reset: toc; }
+  #rl-rp-{{ section.id }} .rl-rp__toc a { display: block; padding: .6rem 0; font-size: 1.45rem; line-height: 1.35; color: var(--rl-navy); text-decoration: none; }
+  #rl-rp-{{ section.id }} .rl-rp__toc a:hover, #rl-rp-{{ section.id }} .rl-rp__toc a.is-active { color: var(--rl-red); text-decoration: underline; text-underline-offset: 4px; }
+  #rl-rp-{{ section.id }} .rl-rp__policies { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+  #rl-rp-{{ section.id }} .rl-rp__policies a { font-size: 1.45rem; color: var(--rl-navy); }
+  #rl-rp-{{ section.id }} .rl-rp__updated { display: inline-flex; margin-bottom: 2.4rem; }
+  #rl-rp-{{ section.id }} .rl-prose { max-width: 76rem; font-size: 1.7rem; line-height: 1.75; color: rgba(var(--color-foreground), .88); }
+  #rl-rp-{{ section.id }} .rl-prose h2 { font-size: clamp(2.2rem, 2.6vw, 2.8rem); margin: 4.8rem 0 1.2rem; color: rgb(var(--color-foreground)); scroll-margin-top: 12rem; }
+  #rl-rp-{{ section.id }} .rl-prose h2:first-child { margin-top: 0; }
+  #rl-rp-{{ section.id }} .rl-prose h3 { font-family: var(--rl-body); font-weight: 600; font-size: 1.9rem; margin: 2.8rem 0 .8rem; }
+  #rl-rp-{{ section.id }} .rl-prose p { margin: 0 0 1.4rem; }
+  #rl-rp-{{ section.id }} .rl-prose ul, #rl-rp-{{ section.id }} .rl-prose ol { padding-left: 2.2rem; margin: 0 0 1.6rem; }
+  #rl-rp-{{ section.id }} .rl-prose li { margin-bottom: .6rem; }
+  #rl-rp-{{ section.id }} .rl-prose li::marker { color: var(--rl-red); }
+  #rl-rp-{{ section.id }} .rl-prose a { color: var(--rl-red); }
+  #rl-rp-{{ section.id }} .rl-prose strong { color: rgb(var(--color-foreground)); }
+  #rl-rp-{{ section.id }} .rl-prose table { width: 100%; border-collapse: collapse; display: block; overflow-x: auto; }
+  #rl-rp-{{ section.id }} .rl-prose td, #rl-rp-{{ section.id }} .rl-prose th { border: 1px solid rgba(var(--color-foreground), .15); padding: .8rem 1.2rem; text-align: left; }
+  #rl-rp-{{ section.id }} .rl-prose blockquote { margin: 2rem 0; padding: 1.6rem 2rem; border-radius: 12px; background: var(--rl-butter); color: var(--rl-navy); }
+  #rl-rp-{{ section.id }} .rl-rp__empty { padding: 3.2rem; border-radius: var(--rl-radius); background: var(--rl-butter); color: var(--rl-navy); }
+{%- endstyle -%}
+
+<section id="rl-rp-{{ section.id }}" class="rl-section color-{{ section.settings.color_scheme }} gradient">
+  <div class="rl-container">
+    <div class="rl-rp__grid">
+      <aside class="rl-rp__aside">
+        {%- if section.settings.show_toc -%}
+          <nav class="rl-rp__box" aria-label="On this page" data-rl-toc-wrap hidden>
+            <p class="rl-rp__box-title">On this page</p>
+            <ol class="rl-rp__toc" data-rl-toc></ol>
+          </nav>
+        {%- endif -%}
+        {%- if section.settings.show_policies -%}
+          <div class="rl-rp__box">
+            <p class="rl-rp__box-title">Store policies</p>
+            <ul class="rl-rp__policies" role="list">
+              {%- for policy in shop.policies -%}
+                {%- if policy.body != blank -%}<li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>{%- endif -%}
+              {%- endfor -%}
+              {%- if section.settings.contact_page != blank -%}<li><a href="{{ section.settings.contact_page.url }}">Contact us</a></li>{%- endif -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </aside>
+
+      <div>
+        {%- if section.settings.updated != blank -%}<span class="rl-pill rl-rp__updated" style="background: rgba(var(--color-foreground), .08)">Last updated: {{ section.settings.updated | escape }}</span>{%- endif -%}
+        {%- if page.content != blank -%}
+          <article class="rl-prose rte" data-rl-prose>{{ page.content }}</article>
+        {%- else -%}
+          <div class="rl-rp__empty">
+            <p><strong>This page has no text yet.</strong> In Shopify admin, open Online Store → Pages, edit this page, and paste the text for this page. Use Heading 2 for each section so they appear in the "On this page" list automatically.</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- if section.settings.show_toc -%}
+<script>
+  (function () {
+    var root = document.getElementById('rl-rp-{{ section.id }}');
+    if (!root) return;
+    var prose = root.querySelector('[data-rl-prose]');
+    var list = root.querySelector('[data-rl-toc]');
+    var wrap = root.querySelector('[data-rl-toc-wrap]');
+    if (!prose || !list || !wrap) return;
+    var heads = prose.querySelectorAll('h2');
+    if (heads.length < 2) return;
+    var links = [];
+    heads.forEach(function (h, i) {
+      if (!h.id) h.id = 'rl-sec-' + (i + 1) + '-' + h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40);
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.trim();
+      li.appendChild(a); list.appendChild(li); links.push(a);
+    });
+    wrap.hidden = false;
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            links.forEach(function (l) { l.classList.toggle('is-active', l.getAttribute('href') === '#' + en.target.id); });
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      heads.forEach(function (h) { io.observe(h); });
+    }
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "RikLoot Policy page",
+  "tag": "div",
+  "class": "section-rl-rich-page",
+  "settings": [
+    { "type": "paragraph", "content": "Shows the page's own text (edit it under Online Store → Pages). Use Heading 2 for each section." },
+    { "type": "text", "id": "updated", "label": "Last updated date", "default": "[DD Month YYYY]" },
+    { "type": "checkbox", "id": "show_toc", "label": "Show 'On this page' list", "default": true },
+    { "type": "checkbox", "id": "show_policies", "label": "Show store policy links", "default": true },
+    { "type": "page", "id": "contact_page", "label": "Contact page link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 80 }
+  ],
+  "presets": [ { "name": "RikLoot Policy page" } ]
+}
+{% endschema %}

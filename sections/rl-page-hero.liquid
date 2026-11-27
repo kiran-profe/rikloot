@@ -1,0 +1,99 @@
+{%- liquid
+  assign heading = section.settings.heading
+  assign sub = section.settings.subheading
+  if heading == blank
+    if collection and request.page_type == 'collection'
+      assign heading = collection.title
+    elsif page
+      assign heading = page.title
+    elsif request.page_type == 'list-collections'
+      assign heading = 'All categories'
+    endif
+  endif
+  if sub == blank and collection and request.page_type == 'collection'
+    assign sub = collection.description | strip_html | truncatewords: 30
+  endif
+-%}
+{%- style -%}
+  #rl-ph-{{ section.id }} { position: relative; overflow: hidden; padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; }
+  #rl-ph-{{ section.id }} .rl-ph__grid { position: relative; display: grid; grid-template-columns: 1fr; gap: 2.4rem; align-items: center; }
+  @media (min-width: 900px) { #rl-ph-{{ section.id }} .rl-ph__grid { grid-template-columns: 1.4fr .8fr; } }
+  #rl-ph-{{ section.id }} .rl-ph__crumbs { display: flex; flex-wrap: wrap; gap: .6rem; font-size: 1.4rem; margin: 0 0 1.4rem; padding: 0; list-style: none; opacity: .85; }
+  #rl-ph-{{ section.id }} .rl-ph__crumbs a { color: inherit; text-decoration: none; }
+  #rl-ph-{{ section.id }} .rl-ph__crumbs a:hover { text-decoration: underline; }
+  #rl-ph-{{ section.id }} .rl-ph__crumbs li + li::before { content: "/"; margin-right: .6rem; opacity: .6; }
+  #rl-ph-{{ section.id }} h1 { margin: 0; font-size: clamp(3.4rem, 5vw, 6rem); line-height: 1.05; }
+  #rl-ph-{{ section.id }} .rl-ph__sub { margin: 1.4rem 0 0; max-width: 60rem; font-size: 1.8rem; line-height: 1.55; opacity: .85; }
+  #rl-ph-{{ section.id }} .rl-ph__meta { margin-top: 1.6rem; }
+  #rl-ph-{{ section.id }} .rl-ph__art { width: 100%; max-width: 34rem; height: auto; justify-self: center; }
+  #rl-ph-{{ section.id }} .rl-ph__img { width: 100%; max-width: 40rem; height: auto; border-radius: var(--rl-radius); justify-self: center; }
+  @media (max-width: 899px) { #rl-ph-{{ section.id }} .rl-ph__art, #rl-ph-{{ section.id }} .rl-ph__img { max-width: 22rem; justify-self: start; } }
+  #rl-ph-{{ section.id }} .rl-ph__chips { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.4rem; }
+  #rl-ph-{{ section.id }} .rl-ph__chip {
+    display: inline-flex; align-items: center; min-height: 4.4rem; padding: 0 1.8rem; border-radius: 999px;
+    border: 2px solid rgba(var(--color-foreground), .22); color: inherit; text-decoration: none; font-weight: 600; font-size: 1.45rem;
+  }
+  #rl-ph-{{ section.id }} .rl-ph__chip:hover { border-color: rgb(var(--color-foreground)); }
+  #rl-ph-{{ section.id }} .rl-ph__chip[aria-current="page"] { background: var(--rl-yellow); border-color: var(--rl-yellow); color: var(--rl-navy); }
+{%- endstyle -%}
+
+<section id="rl-ph-{{ section.id }}" class="rl-section color-{{ section.settings.color_scheme }} gradient">
+  <svg class="rl-dots-bg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="rlpd-{{ section.id }}" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="currentColor"/></pattern></defs><rect width="100%" height="100%" fill="url(#rlpd-{{ section.id }})"/></svg>
+  <div class="rl-container">
+    <div class="rl-ph__grid">
+      <div>
+        {%- if section.settings.show_breadcrumbs -%}
+          <nav aria-label="Breadcrumb">
+            <ol class="rl-ph__crumbs">
+              <li><a href="{{ routes.root_url }}">Home</a></li>
+              {%- if request.page_type == 'collection' -%}<li><a href="{{ routes.collections_url }}">Categories</a></li>{%- endif -%}
+              <li aria-current="page">{{ heading | escape }}</li>
+            </ol>
+          </nav>
+        {%- endif -%}
+        <h1>{{ heading | escape }}</h1>
+        {%- if sub != blank -%}<p class="rl-ph__sub">{{ sub | escape }}</p>{%- endif -%}
+        {%- if collection and request.page_type == 'collection' and section.settings.show_count -%}
+          <div class="rl-ph__meta"><span class="rl-pill" style="background: rgba(var(--color-foreground), .12)">{{ collection.products_count }} {% if collection.products_count == 1 %}product{% else %}products{% endif %}</span></div>
+        {%- endif -%}
+        {%- if section.settings.chips_menu != blank -%}
+          <nav class="rl-ph__chips" aria-label="Categories">
+            {%- for link in section.settings.chips_menu.links -%}
+              <a class="rl-ph__chip" href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+            {%- endfor -%}
+          </nav>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 800 | image_tag: class: 'rl-ph__img', loading: 'eager', widths: '300, 500, 800' }}
+      {%- elsif section.settings.art != 'none' -%}
+        {% render 'rl-art', name: section.settings.art, class: 'rl-ph__art' %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RikLoot Page banner",
+  "tag": "div",
+  "class": "section-rl-page-hero",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave empty to use the page or collection title." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "info": "On collection pages, empty uses the collection description." },
+    { "type": "checkbox", "id": "show_breadcrumbs", "label": "Show breadcrumbs", "default": true },
+    { "type": "checkbox", "id": "show_count", "label": "Show product count (collections)", "default": true },
+    { "type": "link_list", "id": "chips_menu", "label": "Category chips menu", "info": "Optional. Create a menu of your collections in Navigation and pick it here." },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "select", "id": "art", "label": "Built-in illustration (if no image)", "default": "pin", "options": [
+      { "value": "none", "label": "None" }, { "value": "pin", "label": "Parcel pin" }, { "value": "team", "label": "Shelf to door" },
+      { "value": "kitchen", "label": "Kitchen" }, { "value": "storage", "label": "Storage" }, { "value": "crafts", "label": "Crafts" },
+      { "value": "decor", "label": "Home décor" }, { "value": "essentials", "label": "Essentials" }, { "value": "gifts", "label": "Gifts" },
+      { "value": "beauty", "label": "Beauty & care" }, { "value": "gadgets", "label": "Gadgets" } ] },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 56 }
+  ],
+  "presets": [ { "name": "RikLoot Page banner" } ]
+}
+{% endschema %}

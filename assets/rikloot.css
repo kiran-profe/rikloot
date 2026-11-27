@@ -1,0 +1,158 @@
+/* =========================================================
+   RikLoot brand layer for Dawn
+   Only restyles. Cart, checkout and customer-account logic
+   stay 100% Shopify / Dawn.
+   ========================================================= */
+
+:root {
+  --rl-navy: #15213D;
+  --rl-navy-2: #22375F;
+  --rl-red: #CF3A21;
+  --rl-red-bright: #E2432A;
+  --rl-yellow: #FFC12E;
+  --rl-yellow-deep: #E59A00;
+  --rl-butter: #FFF4D9;
+  --rl-mist: #F5F7FC;
+  --rl-muted: #5A6785;
+  --rl-muted-on-dark: #D5DDEE;
+  --rl-radius: 18px;
+  --rl-radius-sm: 12px;
+  --rl-display: 'Grandstander', 'Trebuchet MS', cursive;
+  --rl-body: 'Outfit', 'Segoe UI', system-ui, sans-serif;
+
+  --font-heading-family: var(--rl-display);
+  --font-heading-weight: 800;
+  --font-heading-style: normal;
+  --font-body-family: var(--rl-body);
+  --font-body-style: normal;
+  --font-body-weight: 400;
+  --font-body-weight-bold: 600;
+}
+
+body { font-family: var(--rl-body); letter-spacing: 0.01em; }
+h1, h2, h3, .h0, .h1, .h2, .h3 { letter-spacing: -0.015em; line-height: 1.1; }
+h4, h5, .h4, .h5 { font-family: var(--rl-body); font-weight: 600; letter-spacing: 0; }
+
+::selection { background: var(--rl-yellow); color: var(--rl-navy); }
+
+/* ---------- Buttons ---------- */
+.button, .shopify-challenge__button, .customer button, button.shopify-payment-button__button--unbranded {
+  font-family: var(--rl-body);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  min-height: 4.8rem;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.button:not([disabled]):hover { transform: translateY(-1px); }
+.button:focus-visible, a:focus-visible, button:focus-visible, .field__input:focus-visible {
+  outline: 3px solid var(--rl-yellow);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+/* ---------- Inputs ---------- */
+.field__input, .select__select, .customer .field input, .localization-form__select { font-family: var(--rl-body); }
+
+/* ---------- Header ---------- */
+.header__heading-link .h2, .header__heading-logo-wrapper + .h2 { font-family: var(--rl-display); }
+.header__heading-link { text-decoration: none; }
+.header__menu-item { font-weight: 500; font-size: 1.5rem; }
+.header__menu-item:hover span { text-decoration-color: var(--rl-red); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.header__active-menu-item { text-decoration-color: var(--rl-red); text-decoration-thickness: 2px; }
+.cart-count-bubble { background-color: var(--rl-red) !important; color: #fff !important; }
+.announcement-bar__message { font-weight: 500; letter-spacing: 0.02em; }
+
+/* ---------- Product cards ---------- */
+.card-wrapper .card__heading { font-family: var(--rl-body); font-weight: 600; font-size: 1.55rem; line-height: 1.35; }
+.card-wrapper .card__heading a { text-decoration: none; }
+.card--card, .card--standard .card__inner { overflow: hidden; }
+.card--card { border: 1px solid rgba(21, 33, 61, .06); }
+.card-wrapper:hover .card--card { box-shadow: 0 14px 30px -18px rgba(21, 33, 61, .45); }
+.price__sale .price-item--sale, .price--on-sale .price-item--regular + .price-item--sale { color: var(--rl-red); font-weight: 600; }
+.price-item--regular { font-weight: 600; }
+.badge { border-radius: 999px; font-weight: 600; letter-spacing: .02em; padding: .45rem 1.1rem; }
+.price--on-sale .badge, .badge.color-scheme-5 { background: var(--rl-red); color: #fff; border-color: var(--rl-red); }
+.card__badge .badge.color-scheme-3 { background: var(--rl-navy); }
+.quick-add__submit { border-radius: 999px; }
+
+/* ---------- Product page ---------- */
+.product__title h1 { font-size: clamp(2.8rem, 3.4vw, 4rem); }
+.product__info-container .price { font-size: 2rem; }
+.product-form__submit { background: var(--rl-red); color: #fff; }
+.product__tax, .product__sku { color: var(--rl-muted); }
+
+/* ---------- Collection / filters ---------- */
+.facets__summary, .facet-filters__label { font-weight: 600; }
+.active-facets__button-inner { border-radius: 999px; }
+.pagination__item--current { background: var(--rl-navy); color: #fff !important; border-radius: 999px; }
+.pagination__item--current::after { display: none; }
+
+/* ---------- Cart (drawer + page) — visual only ---------- */
+.drawer__inner { border-radius: 0; }
+.drawer__heading, .title-wrapper-with-link .title { font-family: var(--rl-display); }
+.cart-item__name { font-weight: 600; text-decoration: none; }
+.cart__checkout-button, #CartDrawer-Checkout { background: var(--rl-red); color: #fff; border-radius: 999px; }
+.cart__checkout-button::after, #CartDrawer-Checkout::after { box-shadow: none !important; }
+.totals__total-value { font-family: var(--rl-display); font-size: 2.2rem; }
+.cart__empty-text, .drawer__inner-empty .cart__empty-text { font-family: var(--rl-display); }
+.quantity { border-radius: 999px; }
+.quantity::before, .quantity::after { border-radius: 999px; }
+
+/* ---------- Footer ---------- */
+.footer { border-top: 0 !important; }
+.footer-block__heading { font-family: var(--rl-display); font-size: 1.9rem; }
+.footer a { text-decoration: none; }
+.footer .list-menu__item--link:hover { color: var(--rl-yellow); }
+
+/* =========================================================
+   Shared RikLoot section pieces
+   ========================================================= */
+.rl-section { position: relative; }
+.rl-container { max-width: var(--page-width, 128rem); margin: 0 auto; padding: 0 1.5rem; }
+@media (min-width: 750px) { .rl-container { padding: 0 5rem; } }
+
+.rl-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; flex-wrap: wrap; margin-bottom: 3.2rem; }
+.rl-head__title { margin: 0; font-size: clamp(2.8rem, 3.6vw, 4.2rem); }
+.rl-head__sub { margin: .8rem 0 0; max-width: 56rem; font-size: 1.7rem; line-height: 1.55; color: var(--rl-muted); }
+.color-scheme-3 .rl-head__sub, .rl-on-dark .rl-head__sub { color: var(--rl-muted-on-dark); }
+.rl-link-arrow { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; text-decoration: none; color: inherit; border-bottom: 2px solid var(--rl-red); padding-bottom: .2rem; }
+.rl-link-arrow svg { transition: transform .15s ease; }
+.rl-link-arrow:hover svg { transform: translateX(3px); }
+
+.rl-pill { display: inline-flex; align-items: center; gap: .6rem; padding: .55rem 1.2rem; border-radius: 999px; font-size: 1.4rem; font-weight: 500; }
+
+.rl-dots-bg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .08; }
+
+@media (prefers-reduced-motion: reduce) {
+  .button, .rl-link-arrow svg, .rl-cat-card, .rl-cat-card__art { transition: none !important; }
+}
+
+/* ---------- Motion & delight ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .card-wrapper .card__media img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .card-wrapper:hover .card__media img:first-child { transform: scale(1.06); }
+  /* Cart bubble pops each time Shopify re-renders it after "Add to cart" */
+  .cart-count-bubble { animation: rlBubble .5s cubic-bezier(.3,1.6,.5,1); }
+  @keyframes rlBubble { 0% { transform: scale(.3); } 100% { transform: scale(1); } }
+  .header__icon--cart:hover svg { animation: rlWiggle .5s ease; }
+  @keyframes rlWiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-10deg); } 75% { transform: rotate(8deg); } }
+  .product-form__submit:not([disabled]):hover { box-shadow: 0 10px 24px -12px rgba(207,58,33,.8); }
+  .footer .list-menu__item--link { transition: color .2s ease, transform .2s ease; display: inline-block; }
+  .footer .list-menu__item--link:hover { transform: translateX(4px); }
+}
+.section-header.shopify-section-header-sticky .header-wrapper,
+.shopify-section-header-sticky .header-wrapper { box-shadow: 0 6px 24px -14px rgba(21,33,61,.35); }
+
+/* ---------- Shopify policy pages (/policies/...) ---------- */
+.shopify-policy__container { max-width: 80rem !important; padding: 5.6rem 2rem 8rem !important; }
+.shopify-policy__title { text-align: left !important; margin-bottom: 3.2rem; padding-bottom: 2.4rem; border-bottom: 4px dotted var(--rl-yellow); }
+.shopify-policy__title h1 { font-family: var(--rl-display); font-size: clamp(3.2rem, 4.4vw, 5rem); color: var(--rl-navy); margin: 0; }
+.shopify-policy__body { font-size: 1.7rem; line-height: 1.75; color: rgba(21, 33, 61, .88); }
+.shopify-policy__body h2 { font-family: var(--rl-display); font-size: clamp(2.2rem, 2.6vw, 2.8rem); color: var(--rl-navy); margin: 4.4rem 0 1.2rem; }
+.shopify-policy__body h3 { font-family: var(--rl-body); font-weight: 600; font-size: 1.9rem; margin: 2.8rem 0 .8rem; }
+.shopify-policy__body ul, .shopify-policy__body ol { padding-left: 2.2rem; }
+.shopify-policy__body li { margin-bottom: .6rem; }
+.shopify-policy__body li::marker { color: var(--rl-red); }
+.shopify-policy__body a { color: var(--rl-red); }
+.shopify-policy__body table { width: 100%; border-collapse: collapse; display: block; overflow-x: auto; }
+.shopify-policy__body td, .shopify-policy__body th { border: 1px solid rgba(21, 33, 61, .15); padding: .8rem 1.2rem; text-align: left; }

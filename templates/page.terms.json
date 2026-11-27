@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "banner": {
+      "type": "rl-page-hero",
+      "settings": {
+        "heading": "",
+        "subheading": "The fine print, written to be read. Please go through these before placing an order.",
+        "art": "none",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "content": {
+      "type": "rl-rich-page",
+      "settings": {
+        "updated": "7 October 2026"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "content"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "rl_newsletter": {
+      "type": "rl-newsletter",
+      "settings": {}
+    },
+    "rl_marquee": {
+      "type": "rl-marquee",
+      "blocks": {
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Every order tracked",
+            "link": ""
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "Secure checkout",
+            "link": ""
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "Handpicked finds",
+            "link": ""
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "text": "Fair prices",
+            "link": ""
+          }
+        },
+        "m5": {
+          "type": "item",
+          "settings": {
+            "text": "Real people, real help",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5"
+      ],
+      "settings": {
+        "tone": "red",
+        "speed": 40,
+        "tilt": 0,
+        "padding": 16
+      }
+    },
+    "rl_footer": {
+      "type": "rl-footer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "rl_newsletter",
+    "rl_marquee",
+    "rl_footer"
+  ]
+}

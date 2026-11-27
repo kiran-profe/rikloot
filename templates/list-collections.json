@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "banner": {
+      "type": "rl-page-hero",
+      "settings": {
+        "heading": "All categories",
+        "subheading": "Every shelf in the RikLoot store, in one place.",
+        "art": "storage",
+        "color_scheme": "scheme-2",
+        "show_count": false
+      }
+    },
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "title": "",
+        "sort": "alphabetical",
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "columns_mobile": "2"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main"
+  ]
+}

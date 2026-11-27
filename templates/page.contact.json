@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "banner": {
+      "type": "rl-page-hero",
+      "settings": {
+        "heading": "Contact us",
+        "subheading": "Real people, quick replies. Tell us how we can help.",
+        "art": "gifts",
+        "color_scheme": "scheme-3"
+      }
+    },
+    "contact": {
+      "type": "rl-contact",
+      "blocks": {
+        "faq1": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I track my order?",
+            "answer": "<p>Once your order ships, we email you a tracking link. You can also see it anytime by signing in to your account and opening the order.</p>"
+          }
+        },
+        "faq2": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>[Add your typical delivery time, e.g. 5–10 working days across India.]</p>"
+          }
+        },
+        "faq3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I return a product?",
+            "answer": "<p>[Add your return window and conditions here.] See our Terms &amp; Conditions for full details.</p>"
+          }
+        },
+        "faq4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you offer Cash on Delivery?",
+            "answer": "<p>[Yes / No — update this to match your payment settings.]</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq1",
+        "faq2",
+        "faq3",
+        "faq4"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "banner",
+    "contact"
+  ]
+}

@@ -1,0 +1,153 @@
+{%- style -%}
+  #rl-cats-{{ section.id }} { padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; }
+  #rl-cats-{{ section.id }} .rl-cat-grid {
+    display: grid; gap: 1.6rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (min-width: 750px) { #rl-cats-{{ section.id }} .rl-cat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; } }
+  @media (min-width: 1100px) { #rl-cats-{{ section.id }} .rl-cat-grid { grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr)); } }
+  #rl-cats-{{ section.id }} .rl-cat-cell { display: flex; }
+  #rl-cats-{{ section.id }} .rl-cat-cell > .rl-cat-card { flex: 1; }
+  #rl-cats-{{ section.id }} .rl-cat-card {
+    position: relative; display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 26rem; padding: 2rem; border-radius: var(--rl-radius);
+    text-decoration: none; color: var(--rl-navy); overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  #rl-cats-{{ section.id }} .rl-cat-card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px -22px rgba(21,33,61,.55); }
+  #rl-cats-{{ section.id }} .rl-cat-card--butter { background: #FFF4D9; }
+  #rl-cats-{{ section.id }} .rl-cat-card--mist { background: #EAF0FD; }
+  #rl-cats-{{ section.id }} .rl-cat-card--blush { background: #FDE8E3; }
+  #rl-cats-{{ section.id }} .rl-cat-card--mint { background: #E3F4EC; }
+  #rl-cats-{{ section.id }} .rl-cat-card--navy { background: var(--rl-navy); color: #fff; }
+  #rl-cats-{{ section.id }} .rl-cat-card__art { width: 100%; height: 15rem; transition: transform .25s ease; }
+  #rl-cats-{{ section.id }} .rl-cat-card:hover .rl-cat-card__art { transform: scale(1.05) rotate(-1.5deg); }
+  #rl-cats-{{ section.id }} .rl-cat-card__img { width: 100%; height: 15rem; object-fit: contain; }
+  #rl-cats-{{ section.id }} .rl-cat-card__img--cover { object-fit: cover; border-radius: var(--rl-radius-sm); }
+  #rl-cats-{{ section.id }} .rl-cat-card__foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; margin-top: 1.2rem; }
+  #rl-cats-{{ section.id }} .rl-cat-card__name { margin: 0; font-family: var(--rl-display); font-size: 2.1rem; line-height: 1.15; color: inherit; }
+  #rl-cats-{{ section.id }} .rl-cat-card__count { margin: .3rem 0 0; font-size: 1.35rem; opacity: .75; }
+  #rl-cats-{{ section.id }} .rl-cat-card__go {
+    flex: none; width: 4.4rem; height: 4.4rem; border-radius: 999px; display: grid; place-items: center;
+    background: var(--rl-navy); color: #fff;
+  }
+  #rl-cats-{{ section.id }} .rl-cat-card--navy .rl-cat-card__go { background: var(--rl-yellow); color: var(--rl-navy); }
+  #rl-cats-{{ section.id }} .rl-cat-card--wide { grid-column: span 2; }
+  @media (max-width: 749px) {
+    #rl-cats-{{ section.id }} .rl-cat-card { min-height: 21rem; padding: 1.4rem; }
+    #rl-cats-{{ section.id }} .rl-cat-card__art, #rl-cats-{{ section.id }} .rl-cat-card__img { height: 11rem; }
+    #rl-cats-{{ section.id }} .rl-cat-card__name { font-size: 1.75rem; }
+    #rl-cats-{{ section.id }} .rl-cat-card__go { width: 3.6rem; height: 3.6rem; }
+  }
+{%- endstyle -%}
+
+<section id="rl-cats-{{ section.id }}" class="rl-section color-{{ section.settings.color_scheme }} gradient">
+  <div class="rl-container">
+    <div class="rl-head{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div>
+        <h2 class="rl-head__title">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.subheading != blank -%}<p class="rl-head__sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+      </div>
+      {%- if section.settings.link_label != blank -%}
+        <a class="rl-link-arrow" href="{{ section.settings.link_url | default: routes.collections_url }}">{{ section.settings.link_label | escape }}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      {%- endif -%}
+    </div>
+
+    <div class="rl-cat-grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign col = block.settings.collection
+          assign title = block.settings.title
+          if title == blank and col != blank
+            assign title = col.title
+          endif
+          if title == blank
+            assign title = 'Category'
+          endif
+          assign href = '#'
+          if col != blank
+            assign href = col.url
+          endif
+        -%}
+        <div class="rl-cat-cell{% if block.settings.wide %} rl-cat-card--wide{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" data-cascade style="--animation-order: {{ forloop.index }};" {{ block.shopify_attributes }}>
+        <a href="{{ href }}" class="rl-cat-card rl-cat-card--{{ block.settings.tone }}">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 700 | image_tag: class: 'rl-cat-card__img rl-cat-card__img--cover', loading: 'lazy', widths: '300, 500, 700', alt: title }}
+          {%- elsif block.settings.use_collection_image and col.featured_image != blank -%}
+            {{ col.featured_image | image_url: width: 700 | image_tag: class: 'rl-cat-card__img', loading: 'lazy', widths: '300, 500, 700', alt: title }}
+          {%- else -%}
+            {% render 'rl-art', name: block.settings.art, class: 'rl-cat-card__art' %}
+          {%- endif -%}
+          <span class="rl-cat-card__foot">
+            <span>
+              <span class="rl-cat-card__name" role="heading" aria-level="3">{{ title | escape }}</span>
+              {%- if col != blank and section.settings.show_count -%}
+                <span class="rl-cat-card__count" style="display:block">{{ col.products_count }} {% if col.products_count == 1 %}find{% else %}finds{% endif %}</span>
+              {%- elsif block.settings.caption != blank -%}
+                <span class="rl-cat-card__count" style="display:block">{{ block.settings.caption | escape }}</span>
+              {%- endif -%}
+            </span>
+            <span class="rl-cat-card__go" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "RikLoot Categories",
+  "tag": "div",
+  "class": "section-rl-categories",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by category" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "From the kitchen counter to the craft table — pick a shelf and start exploring." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "See all categories" },
+    { "type": "url", "id": "link_url", "label": "Link" },
+    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": true },
+    { "type": "select", "id": "columns_desktop", "label": "Columns on desktop", "default": "4", "options": [ { "value": "3", "label": "3" }, { "value": "4", "label": "4" } ] },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Title", "info": "Leave empty to use the collection's name." },
+        { "type": "text", "id": "caption", "label": "Caption", "info": "Shown when product count is off or no collection is picked." },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Optional. Transparent PNG product cut-outs look best." },
+        { "type": "checkbox", "id": "use_collection_image", "label": "Use collection image if no image is set", "default": false },
+        { "type": "select", "id": "art", "label": "Built-in illustration", "default": "kitchen", "options": [
+          { "value": "kitchen", "label": "Kitchen" }, { "value": "storage", "label": "Storage" }, { "value": "crafts", "label": "Crafts" },
+          { "value": "decor", "label": "Home décor" }, { "value": "essentials", "label": "Essentials" }, { "value": "gifts", "label": "Gifts" },
+          { "value": "beauty", "label": "Beauty & care" }, { "value": "gadgets", "label": "Gadgets" }, { "value": "pin", "label": "Parcel pin" } ] },
+        { "type": "select", "id": "tone", "label": "Card colour", "default": "butter", "options": [
+          { "value": "butter", "label": "Butter yellow" }, { "value": "mist", "label": "Sky blue" }, { "value": "blush", "label": "Blush red" },
+          { "value": "mint", "label": "Mint" }, { "value": "navy", "label": "Navy" } ] },
+        { "type": "checkbox", "id": "wide", "label": "Double width", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "RikLoot Categories",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Kitchen helpers", "caption": "Cook, serve, store", "art": "kitchen", "tone": "blush" } },
+        { "type": "category", "settings": { "title": "Storage & organisers", "caption": "Tidy every corner", "art": "storage", "tone": "mist" } },
+        { "type": "category", "settings": { "title": "Handmade crafts", "caption": "Made with care", "art": "crafts", "tone": "butter" } },
+        { "type": "category", "settings": { "title": "Home décor", "caption": "Little lifts for every room", "art": "decor", "tone": "mint" } },
+        { "type": "category", "settings": { "title": "Everyday essentials", "caption": "The stuff you run out of", "art": "essentials", "tone": "mist" } },
+        { "type": "category", "settings": { "title": "Gadgets", "caption": "Small tech, big help", "art": "gadgets", "tone": "butter" } },
+        { "type": "category", "settings": { "title": "Gift picks", "caption": "Wrapped-ready finds", "art": "gifts", "tone": "navy", "wide": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

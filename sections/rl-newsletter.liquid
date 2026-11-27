@@ -1,0 +1,98 @@
+{%- style -%}
+  #rl-nl-{{ section.id }} { padding: {{ section.settings.padding_top }}px 2rem {{ section.settings.padding_bottom }}px; }
+  #rl-nl-{{ section.id }} .rl-nl__card {
+    position: relative; overflow: hidden; max-width: 128rem; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr; gap: 2.4rem; align-items: center;
+    padding: 4rem 2.4rem; border-radius: 28px; background: var(--rl-yellow); color: var(--rl-navy);
+  }
+  @media (min-width: 900px) { #rl-nl-{{ section.id }} .rl-nl__card { grid-template-columns: 22rem 1fr 1fr; gap: 4.8rem; padding: 5.6rem 6.4rem; } }
+  #rl-nl-{{ section.id }} .rl-nl__card::before {
+    content: ""; position: absolute; inset: 0; opacity: .14; pointer-events: none;
+    background-image: radial-gradient(circle, var(--rl-navy) 1.6px, transparent 2px); background-size: 22px 22px;
+  }
+  #rl-nl-{{ section.id }} .rl-nl__art { position: relative; width: 16rem; height: auto; }
+  @media (min-width: 900px) { #rl-nl-{{ section.id }} .rl-nl__art { width: 100%; } }
+  #rl-nl-{{ section.id }} .rl-nl__env { transform-box: fill-box; transform-origin: center; animation: rlNlFloat 3.6s ease-in-out infinite; }
+  #rl-nl-{{ section.id }} .rl-nl__trail { animation: rlNlFlow 1.2s linear infinite; }
+  @keyframes rlNlFloat { 0%, 100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+  @keyframes rlNlFlow { to { stroke-dashoffset: -32.2; } }
+  #rl-nl-{{ section.id }} h2 { position: relative; margin: 0; color: var(--rl-navy); font-size: clamp(2.8rem, 3.6vw, 4.4rem); line-height: 1.05; }
+  #rl-nl-{{ section.id }} .rl-nl__sub { position: relative; margin: 1.2rem 0 0; font-size: 1.7rem; line-height: 1.55; color: #2A3655; }
+  #rl-nl-{{ section.id }} .rl-nl__form { position: relative; }
+  #rl-nl-{{ section.id }} .rl-nl__field { display: flex; gap: .8rem; padding: .6rem; border-radius: 999px; background: #fff; box-shadow: 0 14px 30px -18px rgba(21,33,61,.6); }
+  #rl-nl-{{ section.id }} .rl-nl__field:focus-within { box-shadow: 0 0 0 3px var(--rl-navy); }
+  #rl-nl-{{ section.id }} .rl-nl__input { flex: 1; min-width: 0; min-height: 4.8rem; border: 0; background: transparent; padding: 0 1.6rem; font: 400 1.6rem/1 var(--rl-body); color: var(--rl-navy); }
+  #rl-nl-{{ section.id }} .rl-nl__input:focus { outline: none; }
+  #rl-nl-{{ section.id }} .rl-nl__btn { flex: none; min-height: 4.8rem; padding: 0 2.4rem; border: 0; border-radius: 999px; cursor: pointer; background: var(--rl-navy); color: #fff; font: 600 1.6rem/1 var(--rl-body); display: inline-flex; align-items: center; gap: .6rem; }
+  #rl-nl-{{ section.id }} .rl-nl__btn:hover { background: var(--rl-red); }
+  #rl-nl-{{ section.id }} .rl-nl__btn svg { transition: transform .2s ease; }
+  #rl-nl-{{ section.id }} .rl-nl__btn:hover svg { transform: translate(3px, -3px); }
+  @media (max-width: 479px) {
+    #rl-nl-{{ section.id }} .rl-nl__field { flex-direction: column; border-radius: 20px; }
+    #rl-nl-{{ section.id }} .rl-nl__input { min-height: 5rem; }
+    #rl-nl-{{ section.id }} .rl-nl__btn { justify-content: center; }
+  }
+  #rl-nl-{{ section.id }} .rl-nl__note { margin: 1.2rem 0 0 1.6rem; font-size: 1.35rem; color: #3A4664; }
+  #rl-nl-{{ section.id }} .rl-nl__msg { margin: 0 0 1.2rem; padding: 1.2rem 1.6rem; border-radius: 14px; font-size: 1.5rem; font-weight: 500; }
+  #rl-nl-{{ section.id }} .rl-nl__msg--ok { background: var(--rl-navy); color: #fff; }
+  #rl-nl-{{ section.id }} .rl-nl__msg--err { background: #fff; color: #8E2412; }
+  @media (prefers-reduced-motion: reduce) {
+    #rl-nl-{{ section.id }} .rl-nl__env, #rl-nl-{{ section.id }} .rl-nl__trail { animation: none; }
+  }
+{%- endstyle -%}
+
+<div id="rl-nl-{{ section.id }}" class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="rl-nl__card">
+    <svg class="rl-nl__art" viewBox="0 0 220 180" aria-hidden="true" focusable="false">
+      <path class="rl-nl__trail" d="M10 160 C60 170 70 120 110 130" fill="none" stroke="#15213D" stroke-width="6" stroke-dasharray=".1 16" stroke-linecap="round"/>
+      <g class="rl-nl__env">
+        <rect x="70" y="40" width="130" height="90" rx="10" fill="#fff"/>
+        <path d="M70 50 L135 96 L200 50" fill="none" stroke="#15213D" stroke-width="6" stroke-linejoin="round"/>
+        <rect x="150" y="56" width="34" height="26" rx="4" fill="#E2432A"/>
+        <rect x="164" y="56" width="6" height="26" fill="#FFC12E"/>
+      </g>
+      <path d="M40 30l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#E2432A"/>
+    </svg>
+    <div>
+      <h2>{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.subheading != blank -%}<p class="rl-nl__sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+    </div>
+    <div class="rl-nl__form">
+      {%- assign nl_form_id = 'RlNewsletter-' | append: section.id -%}
+      {%- form 'customer', id: nl_form_id -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="rl-nl__msg rl-nl__msg--ok" role="status" tabindex="-1" autofocus>You're on the list! Watch your inbox for new loot.</p>
+        {%- elsif form.errors -%}
+          <p class="rl-nl__msg rl-nl__msg--err" role="alert" tabindex="-1" autofocus>{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+        {%- endif -%}
+        <label class="visually-hidden" for="RlNlEmail-{{ section.id }}">Email address</label>
+        <div class="rl-nl__field">
+          <input class="rl-nl__input" id="RlNlEmail-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="you@example.com" required aria-required="true">
+          <button type="submit" class="rl-nl__btn">{{ section.settings.button_label | escape }}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+          </button>
+        </div>
+        {%- if section.settings.note != blank -%}<p class="rl-nl__note">{{ section.settings.note | escape }}</p>{%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "RikLoot Newsletter",
+  "tag": "section",
+  "class": "section-rl-newsletter",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get first dibs on new loot" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "New arrivals, restocks and subscriber-only deals, straight to your inbox." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Count me in" },
+    { "type": "text", "id": "note", "label": "Small print", "default": "No spam. Unsubscribe anytime." },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Background", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 8, "unit": "px", "default": 64 }
+  ],
+  "presets": [ { "name": "RikLoot Newsletter" } ]
+}
+{% endschema %}

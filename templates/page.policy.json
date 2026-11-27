@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "banner": {
+      "type": "rl-page-hero",
+      "settings": {
+        "heading": "",
+        "subheading": "Plain-language answers to how RikLoot works. Please read before placing an order.",
+        "art": "none",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "content": {
+      "type": "rl-rich-page",
+      "settings": {
+        "updated": "7 October 2026"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "content"
+  ]
+}
